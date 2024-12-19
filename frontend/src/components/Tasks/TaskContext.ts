@@ -7,6 +7,7 @@ interface TaskContextType {
   updateTask: (taskId: string, updatedTask: Partial<Task>) => Promise<void>;
   removeTask: (taskId: string) => Promise<void>;
   fetchTasks: () => void;
+  toggleTaskCompletion: (taskId: string) => Promise<void>;
 }
 
 export const TaskContext = createContext<TaskContextType | undefined>(undefined);

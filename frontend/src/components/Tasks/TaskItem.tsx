@@ -7,7 +7,7 @@ interface TaskItemProps {
 }
 
 const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
-  const { updateTask, removeTask } = useTask();
+  const { updateTask, removeTask, toggleTaskCompletion } = useTask();
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(task.title);
 
@@ -22,6 +22,10 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
 
   const handleDeleteClick = async () => {
     await removeTask(task._id);
+  };
+
+  const handleToggleCompletionClick = async () => {
+    await toggleTaskCompletion(task._id);
   };
 
   return (
@@ -41,6 +45,9 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
         <>
           <button onClick={handleEditClick}>Editar</button>
           <button onClick={handleDeleteClick}>Borrar</button>
+          <button onClick={handleToggleCompletionClick}>
+            {task.completed ? 'Marcar como Incompleta' : 'Marcar como Completa'}
+          </button>
         </>
       )}
     </div>

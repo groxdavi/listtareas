@@ -48,8 +48,16 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const toggleTaskCompletion = async (taskId: string) => {
+    const task = tasks.find(task => task._id === taskId);
+    if (task) {
+      await updateTask(taskId, { completed: !task.completed });
+    }
+  };
+
+
   return (
-    <TaskContext.Provider value={{ tasks, addTask, updateTask, removeTask, fetchTasks }}>
+    <TaskContext.Provider value={{ tasks, addTask, updateTask, removeTask, fetchTasks, toggleTaskCompletion }}>
       {children}
     </TaskContext.Provider>
   );
